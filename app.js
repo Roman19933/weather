@@ -12,7 +12,7 @@ new Vue({
         }
     },
     mounted() {
-        this.getWether(this.city)
+        this.getWeather(this.city)
     },
 
     methods: {
