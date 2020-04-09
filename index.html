@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="weather">
+            <div class="weather__btn">
+                <button v-for="(item,index) in cities" :key="index" @click="setCity(item)"
+                    :class="{'active': city == item}">
+                    <span v-if="isLoading && city == item" class="loading">loading...</span>
+                    <span v-else>{{item}}</span>
+                </button>
+            </div>
+            <div class="weather__table" v-if="weatherData && weatherData.main && weatherData.wind">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="2">{{this.weatherData.name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Temperature</th>
+                            <td>{{this.weatherData.main.temp}} °C</td>
+                        </tr>
+                        <tr>
+                            <th>Atmospheric pressure</th>
+                            <td>{{this.weatherData.main.pressure}} hPa</td>
+                        </tr>
+                        <tr>
+                            <th>Humidity</th>
+                            <td>{{this.weatherData.main.humidity}} %</td>
+                        </tr>
+                        <tr>
+                            <th>Wind speed</th>
+                            <td>{{this.weatherData.wind.speed}} meter/sec</td>
+                        </tr>
+                        <tr>
+                            <th>Wind direction</th>
+                            <td>{{this.weatherData.wind.deg}} °</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p v-else>{{this.error}}</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js" defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="app.js" defer></script>
+</body>
+
+</html>
